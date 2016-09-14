@@ -7,14 +7,12 @@ class driver:
 	def __init__(self, address, port, baud):
 		""" Initialize the driver object """
 		self.address = addr.assign(address)
-		self.port = port
-		self.baud = baud
 		self.con = serial.Serial()
+		self.con.baudrate = baud
+		self.con.port = port
 	
 	def open(self):
 		""" Opening serial communications to the driver """
-		self.con.baudrate = self.baud
-		self.con.port = self.port
 		self.con.open()
 		status = self.con.isOpen()
 		if status != True:

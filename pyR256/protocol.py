@@ -1,7 +1,7 @@
 # DT PROTOCOL SYNTAX
-CMD_START = "@" 	# /
-CMD_RUN = ""		# R
-CMD_END = "\n\r"		# \r
+CMD_START = "/"
+CMD_RUN = "R"
+CMD_END = "\r"
 
 # POSITIONING
 CMD_FORWARD = "P"

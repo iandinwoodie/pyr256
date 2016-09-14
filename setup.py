@@ -5,7 +5,7 @@ from distutils.core import setup
 setup(
     name = "pyR256",
     packages = ["pyR256"],
-    version = "0.0.1",
+    version = "0.0.2",
     description = "R256 command package",
     author = "Ian Dinwoodie",
     author_email = "dinwoodieian@gmail.com",
