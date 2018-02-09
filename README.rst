@@ -1,4 +1,4 @@
-pyR256
+r256
 =====
 
 .. contents:: Table of Contents

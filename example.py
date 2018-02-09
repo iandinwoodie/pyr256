@@ -1,4 +1,4 @@
-import pyR256
+import r256
 
 dpk1 = pyR256.driver(1, "COM5", 9600)
 dpk1.open()

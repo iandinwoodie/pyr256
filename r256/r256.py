@@ -1,25 +1,32 @@
 import time
 import serial
-from . import address
-from . import protocol as P
+import protocol
 
-class driver:
+class Driver:
 
     def __init__(self, address, port, baud):
         """ Initialize the driver object """
-        self.address = addr.assign(address)
-        self.con = serial.Serial()
-        self.con.baudrate = baud
-        self.con.port = port
+        self.address = assign(address)
+        self.con = serial.Serial(port, baud)
+
+    def assign(self, address):
+        if address in protocol.ADDRESS:
+            return protocol.ADDRESS[address]
+        try:
+            tag = int(address)
+            if (tag < 1) or (tag > 9):
+                raise Exception('Out of bounds')
+            return tag
+        except:
+            print("Error: invalid address " + address)
+            exit()
 
     def open(self):
         """ Opening serial communications to the driver """
         self.con.open()
-        status = self.con.isOpen()
-        if status != True:
+        if not self.con.isOpen():
             print("Error: %d failed to open" %self.con.port)
             exit()
-        return status
 
     def move(self, steps):
         """ Driver actuation command """
