@@ -15,14 +15,3 @@ Requirements
 .. _CPython: http://www.python.org/
 .. _PySerial: https://pypi.python.org/pypi/pyserial
 
-Installation
------
-
-The last stable release is available on PyPI and can be installed with ``pip``::
-
-	$ pip install pyR256
-
-Documentation
------
-
-Documentation on this package is not yet avaiable.
