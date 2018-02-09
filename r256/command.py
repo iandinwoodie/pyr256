@@ -4,6 +4,7 @@ from . import address
 from . import protocol as P
 
 class driver:
+
     def __init__(self, address, port, baud):
         """ Initialize the driver object """
         self.address = addr.assign(address)
@@ -16,7 +17,7 @@ class driver:
         self.con.open()
         status = self.con.isOpen()
         if status != True:
-            print("	Error, "+self.con.port+" failed to open")
+            print("Error: %d failed to open" %self.con.port)
             exit()
         return status
 
@@ -26,14 +27,8 @@ class driver:
             move_select = P.CMD_FORWARD
         else:
             move_select = P.CMD_BACKWARD
-        self.con.write(
-            (P.CMD_START+
-            self.address+
-            move_select+
-            str(steps)+
-            P.CMD_RUN+
-            P.CMD_END
-            ).encode())
+        self.con.write((P.CMD_START + self.address + move_select + str(steps) +
+                        P.CMD_RUN + P.CMD_END).encode())
         bytesToRead = self.con.inWaiting()
         status = self.con.read(bytesToRead)
         status = self.page()
@@ -44,12 +39,8 @@ class driver:
 
     def page(self):
         """ Driver status command """
-        self.con.write(
-            (P.CMD_START+
-            self.address+
-            P.CMD_STS+
-            P.CMD_END
-            ).encode())
+        self.con.write((P.CMD_START + self.address + P.CMD_STS +
+                        P.CMD_END).encode())
         time.sleep(0.1)
         bytesToRead = self.con.inWaiting()
         status = self.con.read().decode('utf-8')
@@ -58,13 +49,8 @@ class driver:
 
     def io(self, state):
         """ Driver I/O command """
-        self.con.write(
-            (P.CMD_START+
-            self.address+
-            P.CMD_IO+
-            str(state)+
-            P.CMD_END
-            ).encode())
+        self.con.write((P.CMD_START + self.address + P.CMD_IO + str(state) +
+                        P.CMD_END).encode())
         time.sleep(0.1)
         bytesToRead = self.con.inWaiting()
         status = (self.con.read(bytesToRead)).decode('utf-8')
