@@ -2,6 +2,7 @@ import time
 import serial
 import protocol
 
+
 class Driver:
 
     def __init__(self, address, port, baud):
