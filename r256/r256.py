@@ -6,11 +6,12 @@ import protocol
 class Driver:
 
     def __init__(self, address, port, baud):
-        """Initialize the driver"""
+        """Initialize communication parameters."""
         self.address = assign(address)
         self.con = serial.Serial(port, baud)
 
     def assign(self, address):
+        """Determine the identification string for the controller."""
         if address in protocol.ADDRESS:
             return protocol.ADDRESS[address]
         try:
@@ -23,14 +24,14 @@ class Driver:
             exit()
 
     def open(self):
-        """ Opening serial communications to the driver """
+        """Establish a connection to the controller."""
         self.con.open()
         if not self.con.isOpen():
             print("Error: %d failed to open" %self.con.port)
             exit()
 
     def move(self, steps):
-        """ Driver actuation command """
+        """Send an actuation command to the controller."""
         if steps >= 0:
             move_select = P.CMD_FORWARD
         else:
@@ -46,7 +47,7 @@ class Driver:
         return status
 
     def page(self):
-        """ Driver status command """
+        """Ping the controller for a status update."""
         self.con.write((P.CMD_START + self.address + P.CMD_STS
                         + P.CMD_END).encode())
         time.sleep(0.1)
@@ -56,7 +57,7 @@ class Driver:
         return status
 
     def io(self, state):
-        """ Driver I/O command """
+        """Send a command to the on-board controller relays."""
         self.con.write((P.CMD_START + self.address + P.CMD_IO + str(state)
                         + P.CMD_END).encode())
         time.sleep(0.1)
@@ -65,7 +66,7 @@ class Driver:
         return status
 
     def close(self):
-        """ Closing communication with the driver """
+        """ Closing communication with the controller."""
         while self.con.isOpen() == True:
             self.con.close()
 
