@@ -5,7 +5,7 @@ import protocol
 class Driver:
 
     def __init__(self, address, port, baud):
-        """ Initialize the driver object """
+        """Initialize the driver"""
         self.address = assign(address)
         self.con = serial.Serial(port, baud)
 
@@ -34,8 +34,8 @@ class Driver:
             move_select = P.CMD_FORWARD
         else:
             move_select = P.CMD_BACKWARD
-        self.con.write((P.CMD_START + self.address + move_select + str(steps) +
-                        P.CMD_RUN + P.CMD_END).encode())
+        self.con.write((P.CMD_START + self.address + move_select + str(steps)
+                        + P.CMD_RUN + P.CMD_END).encode())
         bytesToRead = self.con.inWaiting()
         status = self.con.read(bytesToRead)
         status = self.page()
@@ -46,8 +46,8 @@ class Driver:
 
     def page(self):
         """ Driver status command """
-        self.con.write((P.CMD_START + self.address + P.CMD_STS +
-                        P.CMD_END).encode())
+        self.con.write((P.CMD_START + self.address + P.CMD_STS
+                        + P.CMD_END).encode())
         time.sleep(0.1)
         bytesToRead = self.con.inWaiting()
         status = self.con.read().decode('utf-8')
@@ -56,8 +56,8 @@ class Driver:
 
     def io(self, state):
         """ Driver I/O command """
-        self.con.write((P.CMD_START + self.address + P.CMD_IO + str(state) +
-                        P.CMD_END).encode())
+        self.con.write((P.CMD_START + self.address + P.CMD_IO + str(state)
+                        + P.CMD_END).encode())
         time.sleep(0.1)
         bytesToRead = self.con.inWaiting()
         status = (self.con.read(bytesToRead)).decode('utf-8')
