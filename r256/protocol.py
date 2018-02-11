@@ -56,7 +56,7 @@ QRY_VER = "&"
 QRY_EXE = "$"
 
 # Address dictionary
-ADDRESS = [
+ADDRESS = {
     '0': '@',
     'A': ':',
     'B': 'C',
@@ -65,4 +65,4 @@ ADDRESS = [
     'E': '>',
     'F': '?',
     'all': '_'
-    ]
+    }
