@@ -1,13 +1,13 @@
 import time
 import serial
-import protocol
+from . import protocol
 
 
 class Driver:
 
     def __init__(self, address, port, baud):
         """Initialize communication parameters."""
-        self.address = assign(address)
+        self.address = self.assign(address)
         self.con = serial.Serial(port, baud)
 
     def assign(self, address):

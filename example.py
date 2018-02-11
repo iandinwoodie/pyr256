@@ -1,5 +1,5 @@
-import r256
+from r256 import r256
 
-dpk1 = pyR256.driver(1, "COM5", 9600)
-dpk1.open()
-dpk1.close()
+controller = r256.Driver(1, "COM5", 9600)
+controller.open()
+controller.close()
