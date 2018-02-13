@@ -65,6 +65,10 @@ class Driver:
         status = (self.con.read(bytesToRead)).decode('utf-8')
         return status
 
+    def cancel(self):
+        """Terminate controller activity."""
+        self.con.write((P.CMD_START + self.address + P.TERMINATE).encode())
+
     def close(self):
         """ Closing communication with the controller."""
         while self.con.isOpen() == True:
